@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, FlatList, StyleSheet, Modal} from 'react-native';
+import {View, FlatList, StyleSheet, Modal, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import CardContact from '../Components/molecules/CardContact';
 import Search from '../Components/atoms/Search';
@@ -55,11 +55,14 @@ const ContactsList = () => {
 
   return (
     <View style={styles.container}>
-      <Search
-        searchText={searchText}
-        handle={handleSearch}
-        placeholder="Search"
-      />
+      <View style={styles.input}>
+        <Search
+          searchText={searchText}
+          handle={handleSearch}
+          placeholder="Search"
+        />
+      </View>
+
       <FlatList
         data={filteredContacts}
         renderItem={({item}) => (
@@ -86,6 +89,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  input: {
+    marginTop: Platform.OS === 'ios' ? 30 : 0,
   },
 });
 

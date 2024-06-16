@@ -1,8 +1,9 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Alert} from 'react-native';
 import Button from '../atoms/Button';
 import {useSelector, useDispatch} from 'react-redux';
 import {deleteContacts} from '../../Redux/Action/ContactActions';
+import Toast from 'react-native-toast-message';
 
 const ModalDeleteContact = ({closeModal, data}) => {
   const dispatch = useDispatch();
@@ -10,9 +11,26 @@ const ModalDeleteContact = ({closeModal, data}) => {
 
   const handleDelete = () => {
     dispatch(deleteContacts(data.id)).then(() => {
-      console.log('Contact delete successfully:', error);
-      closeModal();
+      if (error === 'Unknown error') {
+        let errorMessage = 'Request failed with status code 400';
+        console.log(errorMessage, 'masukk');
+        alertMessage(errorMessage);
+      }
     });
+  };
+
+  const alertMessage = errorMessage => {
+    Alert.alert(
+      'Hello',
+      errorMessage,
+      [
+        {
+          text: 'OK',
+          onPress: closeModal(),
+        },
+      ],
+      {cancelable: false},
+    );
   };
   return (
     <View style={styles.centeredView}>
@@ -24,13 +42,7 @@ const ModalDeleteContact = ({closeModal, data}) => {
             {data.firstName}
           </Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginTop: 20,
-            justifyContent: 'space-between',
-            width: '70%',
-          }}>
+        <View style={styles.containerButton}>
           <Button
             label="No"
             propsStyle={{...styles.button}}
@@ -85,6 +97,12 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  containerButton: {
+    flexDirection: 'row',
+    marginTop: 20,
+    justifyContent: 'space-between',
+    width: '70%',
   },
 });
 

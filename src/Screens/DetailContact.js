@@ -34,12 +34,14 @@ const DetailContact = props => {
           size={20}
           color="red"
           onPress={() => setModalVisible(true)}
+          buttonStyle={{borderColor: 'red'}}
         />
         <ButtonImage
           icon="pen"
           size={20}
           color="#2196F3"
           onPress={() => setModalEdit(true)}
+          buttonStyle={{borderColor: '#2196F3'}}
         />
       </View>
       <Modal animationType="slide" transparent={true} visible={modalVisible}>

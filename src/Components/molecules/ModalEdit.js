@@ -14,10 +14,10 @@ const ModalEdit = ({closeModal, data}) => {
   const [id, setId] = useState(data);
 
   const [contact, setContact] = useState({
-    firstName: 'huwayawww',
-    lastName: '12345',
-    age: '123',
-    photo: 'ds',
+    firstName: '',
+    lastName: '',
+    age: '',
+    photo: '',
   });
 
   const handleChangeText = (key, value) => {
@@ -61,13 +61,7 @@ const ModalEdit = ({closeModal, data}) => {
         <View style={{borderBottomWidth: 1}}>
           <Text style={{marginBottom: 5}}>Edit Contact</Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginTop: 20,
-            justifyContent: 'space-between',
-            width: '70%',
-          }}></View>
+        <View style={styles.containerInput}></View>
         <Input
           placeholder="First Name"
           value={contact.firstName}
@@ -137,6 +131,12 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  containerInput: {
+    flexDirection: 'row',
+    marginTop: 20,
+    justifyContent: 'space-between',
+    width: '70%',
   },
 });
 

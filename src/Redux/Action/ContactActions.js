@@ -119,7 +119,6 @@ export const deleteContacts = id => {
       dispatch(deleteContactSuccess(contacts));
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        // Mengambil data respons dari error Axios
         const errorMsg =
           error.response && error.response.data
             ? error.response.data
